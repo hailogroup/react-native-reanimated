@@ -15,7 +15,16 @@ function useSetupNestableScrollContextValue() {
   const scrollableRef = useRef<ScrollView>(null);
   const outerScrollOffset = useMemo(() => new Animated.Value<number>(0), []);
   const containerRef = useRef<Animated.View>(null);
-  const containerSize = useMemo(() => new Animated.Value<number>(0), []);
+  const containerSize = useMemo(() => {
+    console.log("(((((((((((((((( init container size");
+    const animatedValue = new Animated.Value<number>(0);
+    const originalSetValue = animatedValue.setValue;
+    animatedValue.setValue = function (...args) {
+      console.log("++++++++++++++++ setValue called ", ...args);
+      originalSetValue.call(this, ...args);
+    };
+    return animatedValue;
+  }, []);
 
   const contextVal = useMemo(
     () => ({

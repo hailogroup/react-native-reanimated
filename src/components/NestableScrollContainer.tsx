@@ -33,8 +33,9 @@ function NestableScrollContainerInner(props: ScrollViewProps) {
   return (
     <Animated.View
       ref={containerRef}
-      onLayout={({ nativeEvent: { layout } }) => {
-        containerSize.setValue(layout.height);
+      onLayout={({ nativeEvent }) => {
+        containerSize.setValue(nativeEvent.layout.height);
+        // setTimeout(() => containerSize.setValue(nativeEvent.layout.height), 10000)
       }}
     >
       <AnimatedScrollView

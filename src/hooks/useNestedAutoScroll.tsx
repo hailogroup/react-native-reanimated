@@ -60,6 +60,14 @@ export function useNestedAutoScroll({
     scrollViewSize,
   } = useNestableScrollContainerContext();
 
+  useCode(
+    () =>
+      call([containerSize], ([containerSize]) => {
+        console.log("###############", containerSize);
+      }),
+    []
+  );
+
   const scrollOffset = outerScrollOffset;
 
   const isScrolledUp = useNodeAlt(
@@ -209,6 +217,11 @@ export function useNestedAutoScroll({
           !scrollingUpAtTop &&
           !scrollingDownAtBottom;
         if (shouldScroll) {
+          console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", {
+            distFromTop,
+            distFromBottom,
+            scrollOffset,
+          });
           try {
             curParams = await scrollToAsync(targetOffset);
           } catch (err) {}

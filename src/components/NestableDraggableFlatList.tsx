@@ -58,14 +58,17 @@ export function NestableDraggableFlatListInner<T>(
         {...props}
         outerScrollOffset={outerScrollOffset}
         onDragBegin={(...args) => {
+          // console.log("Drag begin", { args })
           setOuterScrollEnabled(false);
           props.onDragBegin?.(...args);
         }}
         onDragEnd={(...args) => {
+          // console.log("Drag end", { args })
           props.onDragEnd?.(...args);
           setOuterScrollEnabled(true);
         }}
         onAnimValInit={(animVals) => {
+          // console.log("Anim Val Init", { animVals })
           setAnimVals({
             ...animVals,
             hoverAnim: add(animVals.hoverAnim, listVerticalOffset),
